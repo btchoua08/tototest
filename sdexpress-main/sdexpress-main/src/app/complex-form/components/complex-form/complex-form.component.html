@@ -1,0 +1,100 @@
+<mat-card [formGroup]="mainForm" class="main-form">
+  <mat-card-title>Register</mat-card-title>
+  <mat-card class="form-card">
+    <mat-card-subtitle>Personnal informations</mat-card-subtitle>
+    <div class="form-row" formGroupName="personalInfo">
+      <mat-form-field appearance="fill">
+        <mat-label>Firstname</mat-label>
+        <input matInput type="text" formControlName="firstName">
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Lastname</mat-label>
+        <input matInput type="text" formControlName="lastName">
+      </mat-form-field>
+    </div>
+  </mat-card>
+
+  <mat-card class="form-card"  formGroupName="email">
+    <mat-card-subtitle>Email</mat-card-subtitle>
+    <div class="form-row">
+      <mat-form-field appearance="fill">
+        <mat-label>E-mail address</mat-label>
+        <input matInput type="email" [formControl]="emailCtrl">
+        <mat-error *ngIf="emailCtrl.invalid">{{ getErrorMessage(emailCtrl) }}</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Confirm your e-mail address</mat-label>
+        <input matInput type="email" [formControl]="confirmEmailCtrl">
+        <mat-error *ngIf="emailCtrl.invalid">{{ getErrorMessage(emailCtrl) }}</mat-error>
+      </mat-form-field>
+    </div>
+    <small class="error-text" *ngIf="showEmailError$ | async">
+      The two addresses do not match
+    </small>
+  </mat-card>
+
+  <mat-card class="form-card" >
+    <mat-card-subtitle>Picture information</mat-card-subtitle>
+    <div class="form-row">
+      <mat-form-field appearance="fill">
+        <mat-label>photo passport</mat-label>
+        <button mat-icon-button matPrefix (click)="f_inputpassport.click()">
+          <mat-icon>attach_file</mat-icon>
+        </button>
+        <input type="text" readonly matInput [formControl]="passportCtrl" />
+        <input 
+        id="file" 
+        type="file"
+        hidden
+        #f_inputpassport 
+        class="form-control"
+        (change)="onFileChangePassport($event)">
+        <small class="error-text" *ngIf="showPictureError$ | async">
+          Please set a passport picture
+          </small>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>photo picture</mat-label>
+        <button mat-icon-button matPrefix (click)="f_inputpicture.click()">
+          <mat-icon>attach_file</mat-icon>
+        </button>
+        <input type="text" readonly matInput [formControl]="pictureCtrl" />
+        <input 
+        id="file" 
+        type="file" 
+        #f_inputpicture 
+        hidden
+        class="form-control"
+        (change)="onFileChangePicture($event)">
+        <small class="error-text" *ngIf="showPictureError$ | async">
+          Please set a profil picture
+          </small>
+      </mat-form-field>
+
+    </div>
+   
+  </mat-card>
+ 
+  
+  <mat-card class="form-card" formGroupName="loginInfo">
+    <mat-card-subtitle>Login information</mat-card-subtitle>
+    <div class="form-row">
+      <mat-form-field appearance="fill">
+        <mat-label>Password</mat-label>
+        <input matInput type="password" [formControl]="passwordCtrl">
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Confirm your password</mat-label>
+        <input matInput type="password" [formControl]="confirmPasswordCtrl">
+      </mat-form-field>
+    </div>
+    <small class="error-text" *ngIf="showPasswordError$ | async">
+      Passwords don't match
+    </small>
+  </mat-card>
+  <mat-card-actions *ngIf="mainForm.valid">
+    <button mat-flat-button color="primary" (click)="onSubmitForm()">REGISTER</button>
+  </mat-card-actions>
+  <app-loading-overlay *ngIf="loading"></app-loading-overlay>
+</mat-card>

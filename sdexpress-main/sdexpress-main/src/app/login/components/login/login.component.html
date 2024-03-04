@@ -1,0 +1,22 @@
+<mat-card [formGroup]="mainForm" class="main-form">
+    <mat-card-title>Account</mat-card-title>
+    <mat-card class="form-card">
+      <mat-card-subtitle>Sign in</mat-card-subtitle>
+      <div class="form-row" formGroupName="personalInfo">
+        <mat-form-field appearance="fill">
+            <mat-label>Password</mat-label>
+            <input matInput type="password" [formControl]="passwordCtrl">
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>E-mail address</mat-label>
+            <input matInput type="email" [formControl]="emailCtrl">
+            <mat-error *ngIf="emailCtrl.invalid">{{ getErrorMessage(emailCtrl) }}</mat-error>
+          </mat-form-field>
+      </div>
+    </mat-card>
+    <mat-card-actions *ngIf="mainForm.valid">
+      <button mat-flat-button color="primary" (click)="onSubmitForm()">LOGIN</button>
+    </mat-card-actions>
+    <app-loading-overlay *ngIf="loading"></app-loading-overlay>
+  </mat-card>
+  

@@ -1,0 +1,69 @@
+<mat-card [formGroup]="mainForm" class="main-form">
+    <mat-card-title>Publication </mat-card-title>
+    <mat-card class="form-card">
+     
+      <div class="form-row">
+        <app-country-list [title]="'Departure country'" [countries]="countries" [countryCtrl]="departureCountryCtrl" (selectCountry)="getSelectDepartureCountry($event)"></app-country-list>
+      
+        <mat-form-field appearance="fill">
+          <mat-label>Departure date</mat-label>
+          <input matInput [matDatepicker]="departurePicker" [formControl]="departureDateCtrl">
+          <mat-datepicker-toggle matIconSuffix [for]="departurePicker"></mat-datepicker-toggle>
+          <mat-datepicker #departurePicker></mat-datepicker>
+        </mat-form-field>
+
+      </div>
+      <div class="form-row" >
+          <app-country-list [title]="'Destination country'" [countries]="countries" [countryCtrl]="destinationCountryCtrl" (selectCountry)="getSelectDestinationCountry($event)"></app-country-list>
+        <mat-form-field appearance="fill">
+          <mat-label>Arrival date</mat-label>
+          <input matInput [matDatepicker]="arrivalPicker" [formControl]="arrivalDateCtrl">
+          <mat-datepicker-toggle matIconSuffix [for]="arrivalPicker"></mat-datepicker-toggle>
+          <mat-datepicker #arrivalPicker></mat-datepicker>
+        </mat-form-field>
+      </div>
+
+      <div class="form-row" >
+        <mat-form-field appearance="fill">
+            <mat-label>Flight ticket picture</mat-label>
+            <button mat-icon-button matPrefix (click)="flightTicket.click()">
+              <mat-icon>attach_file</mat-icon>
+            </button>
+            <input type="text" readonly matInput [formControl]="flightTicketCtrl" />
+            <input 
+            id="file" 
+            type="file"
+            hidden
+            #flightTicket 
+            class="form-control"
+            (change)="onFileFlightTicket($event)">
+            <small class="error-text" *ngIf="showPictureError$ | async">
+              Please set a flight ticket picture
+              </small>
+          </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Number of kilograms available</mat-label>
+          <input matInput type="text" [formControl]="numbreKiloCtrl">
+          <mat-error>{{ getFormControlErrorText(numbreKiloCtrl , 'kilo') }}</mat-error>
+        </mat-form-field>
+       
+      </div>
+      <div class="form-row">
+        <mat-form-field appearance="fill">
+            <mat-label>Phone number</mat-label>
+            <input matInput type="text" [formControl]="phoneNumberCtrl">
+            <mat-error>{{ getFormControlErrorText(phoneNumberCtrl , 'phone') }}</mat-error>
+          </mat-form-field>
+
+          <mat-card-actions  *ngIf="mainForm.valid">
+            <button mat-flat-button color="primary" (click)="onSubmitForm()">REGISTER</button>
+          </mat-card-actions>
+         
+    </div>
+   
+
+    </mat-card>
+   
+    <app-loading-overlay *ngIf="loading"></app-loading-overlay>
+  </mat-card>
+  

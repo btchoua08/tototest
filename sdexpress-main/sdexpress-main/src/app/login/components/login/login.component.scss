@@ -1,0 +1,44 @@
+mat-form-field {
+    width: 45%;
+    &.full-width {
+      width: 80%;
+      margin-left: 10%;
+    }
+  }
+  
+  .form-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .form-card {
+    margin: 20px 0;
+  }
+  
+  .mat-radio-button ~ .mat-radio-button {
+    margin-left: 16px;
+  }
+  
+  mat-card-actions {
+    text-align: center;
+  }
+  
+  .main-form {
+    padding-bottom: 30px;
+    position: relative;
+    box-sizing: border-box;
+    margin: 20px auto;
+    padding: 10px 30px;
+    box-shadow: lightgray 4px 4px 20px;
+  }
+  
+  .error-text {
+    color: red;
+  }
+  
+  .file-input {
+    display: none;
+  }
+  
+  

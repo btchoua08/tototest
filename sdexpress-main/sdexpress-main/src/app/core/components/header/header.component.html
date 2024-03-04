@@ -1,0 +1,13 @@
+<mat-toolbar color="primary">
+<img src="assets/logo.png" width="50" height="50">
+  <span>Suitdesk Express</span>
+  <ul class="header-links">
+    <li><a routerLink="/register">Register</a></li>
+    <li><a routerLink="/login">Login</a></li>
+    <li><a routerLink="/publish">Publish</a></li>
+    <li><a routerLink="/travelers">Travelers</a></li>
+    <li><a routerLink="/reports">Reports</a></li>
+ 
+  </ul>
+</mat-toolbar>
+<mat-progress-bar color="accent" *ngIf="loading$ | async" mode="indeterminate"></mat-progress-bar>
